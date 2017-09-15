@@ -1,0 +1,22 @@
+{
+  "name": "jean-event-dispatcher",
+  "version": "0.0.0",
+  "description": "Provides functionality for an event system",
+  "main": ".js",
+  "scripts": {
+    "test": "open spec/spec-runner.html in browser"
+  },
+  "keywords": [],
+  "author": "Jeremias Andris",
+  "license": "MIT",
+  "dependencies": {
+    "almond": "^0.3.3",
+    "jean-callback": "0.0.6",
+    "jean-list": "0.0.5",
+    "jean-type-check": "0.0.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/je-an/jean-event-dispatcher.git"
+  }
+}
