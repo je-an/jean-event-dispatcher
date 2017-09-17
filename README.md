@@ -35,6 +35,17 @@ Subscribes to an event
 **Returns**
 - `Boolean` - True if subscription is successful, false otherwise
 
+### EventDispatcher.unsubscribeEvent(name, fn) 
+
+Unsubscribes from an event
+
+**Parameters**
+- **name**: `String` - Name of the event
+- **fn**: `function` - Function which will be unsubscribed
+
+**Returns**
+- `Boolean` - True if unsubscription is successful, false otherwise
+
 
 ### EventDispatcher.publishEvent(name, params) 
 
