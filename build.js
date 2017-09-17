@@ -20,6 +20,6 @@
      paths:{
        List: "node_modules/jean-list/src/List",
        TypeCheck: "node_modules/jean-type-check/src/TypeCheck",
-       TCallback: "node_modules/jean-callback/src/Callback"
+       Callback: "node_modules/jean-callback/src/Callback"
     }
 })
