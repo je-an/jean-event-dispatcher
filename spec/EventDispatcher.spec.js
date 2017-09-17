@@ -1,14 +1,17 @@
+// jscs:disable
+// jshint ignore:start
 define([
-    "src/EventDispatcher",
+    "EventDispatcher",
     "List",
-], function (EventDispatcher, List) {
+    "TestModule"
+], function (EventDispatcher, List, TestModule) {
     describe('EventDispatcher.spec.js', function () {
         beforeEach(function () {
-            EventDispatcher._callbacks = new List({ idProperty: "name" });
+            EventDispatcher._callbacks = new List({ idProperty: "id" });
         });
         describe("EventDispatcher", function () {
             it("TODO: Check if all members are available | EXPECTATION: EventDispatcher has all necessary members", function () {
-                var numberOfMembers = 3;
+                var numberOfMembers = 4;
                 expect(Object.keys(EventDispatcher).length).toEqual(numberOfMembers);
             });
             it("TODO: Check if all methods are available | EXPECTATION: EventDispatcher has all necessary methods", function () {
@@ -81,11 +84,33 @@ define([
                 EventDispatcher.subscribeEvent("event2", function () { });
                 EventDispatcher.subscribeEvent("event3", function () { });
                 expect(EventDispatcher._callbacks._list.length).toEqual(5);
-                expect(EventDispatcher._callbacks.getElement("event1").callback._callbacks.length).toEqual(2);
-                expect(EventDispatcher._callbacks.getElement("event2").callback._callbacks.length).toEqual(3);
-                expect(EventDispatcher._callbacks.getElement("event3").callback._callbacks.length).toEqual(1);
-                expect(EventDispatcher._callbacks.getElement("event4").callback._callbacks.length).toEqual(2);
-                expect(EventDispatcher._callbacks.getElement("event5").callback._callbacks.length).toEqual(1);
+                expect(EventDispatcher._callbacks.getElement("event1")._callbacks.length).toEqual(2);
+                expect(EventDispatcher._callbacks.getElement("event2")._callbacks.length).toEqual(3);
+                expect(EventDispatcher._callbacks.getElement("event3")._callbacks.length).toEqual(1);
+                expect(EventDispatcher._callbacks.getElement("event4")._callbacks.length).toEqual(2);
+                expect(EventDispatcher._callbacks.getElement("event5")._callbacks.length).toEqual(1);
+            });
+        });
+        describe('EventDispatcher.unsubscribeEvent', function () {
+            it("TODO: Unsubscribe an event | EXPECTATION: Unsubscription is successful", function () {
+                var fn = function () { };
+                EventDispatcher.subscribeEvent("event1", fn);
+                expect(EventDispatcher.unsubscribeEvent("event1", fn)).toBe(true);
+                expect(EventDispatcher._callbacks._list.length).toEqual(1);
+            });
+            it("TODO: Unsubscribe an event which nothing is registered to | EXPECTATION: Nothing happens", function () {
+                var fn = function () { };
+                EventDispatcher.subscribeEvent("event1", fn);
+                expect(EventDispatcher.unsubscribeEvent("event2", fn)).toBe(false);
+            });
+            it("TODO: Unsubscribe an event after event is fired | EXPECTATION: After event is fired and arrived successfully, the event is unsubscribed", function () {
+                var param = { name: "ok" };
+                var fn = function (params) { 
+                    expect(params.name).toEqual(param.name);
+                };
+                EventDispatcher.subscribeEvent("event1", fn);
+                EventDispatcher.publishEvent("event1", param);
+                expect(EventDispatcher.unsubscribeEvent("event1", fn)).toBe(true);
             });
         });
         describe("EventDispatcher.publishEvent", function () {
@@ -121,18 +146,24 @@ define([
                 expect(EventDispatcher.publishEvent("event2", true)).toBe(false);
             });
             it("TODO: Publish undefined | EXPECTATION: undefined get published", function (done) {
-                EventDispatcher.subscribeEvent("event1", function (param) { 
+                EventDispatcher.subscribeEvent("event1", function (param) {
                     expect(param).toBeUndefined();
                     done();
                 });
                 expect(EventDispatcher.publishEvent("event1", undefined)).toBe(true);
             });
             it("TODO: Publish null | EXPECTATION: null get published", function (done) {
-                EventDispatcher.subscribeEvent("event1", function (param) { 
+                EventDispatcher.subscribeEvent("event1", function (param) {
                     expect(param).toBeNull();
                     done();
                 });
                 expect(EventDispatcher.publishEvent("event1", null)).toBe(true);
+            });
+            it("TODO: Subscribe in a module and publish in another one | EXPECTATION: Subscriber get notified", function(){
+                var param = "arrived";
+                TestModule.registerEvent();
+                EventDispatcher.publishEvent("event1", param);
+                expect(TestModule.getResult()).toEqual(param);
             });
         });
     });

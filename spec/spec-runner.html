@@ -42,11 +42,13 @@
               TypeCheck: "node_modules/jean-type-check/src/TypeCheck",
               List: "node_modules/jean-list/src/List",
               Callback: "node_modules/jean-callback/src/Callback",
+              TestModule: "spec/TestModule",
+              EventDispatcher: "src/EventDispatcher"
             }
         });
 
         require([
-            'spec/EventDispatcher.spec'
+            'spec/EventDispatcher.spec',
         ],
             function () {
                window.executeJasmineTests();

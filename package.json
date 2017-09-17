@@ -1,7 +1,7 @@
 {
   "name": "jean-event-dispatcher",
   "version": "0.0.0",
-  "description": "Provides functionality for an event system",
+  "description": "Provides functionality for an event-based communication system for use as an AMD module",
   "main": ".js",
   "scripts": {
     "test": "open spec/spec-runner.html in browser"
