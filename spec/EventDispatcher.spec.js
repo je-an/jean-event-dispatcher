@@ -11,7 +11,7 @@ define([
         });
         describe("EventDispatcher", function () {
             it("TODO: Check if all members are available | EXPECTATION: EventDispatcher has all necessary members", function () {
-                var numberOfMembers = 4;
+                var numberOfMembers = 5;
                 expect(Object.keys(EventDispatcher).length).toEqual(numberOfMembers);
             });
             it("TODO: Check if all methods are available | EXPECTATION: EventDispatcher has all necessary methods", function () {

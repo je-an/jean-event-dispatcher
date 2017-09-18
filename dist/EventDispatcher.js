@@ -821,7 +821,7 @@ define('src/EventDispatcher',["List", "TypeCheck", "Callback"], function (List, 
          */
         subscribeEvent: function (name, fn) {
             var isSubscribed = false, isAdded = true, newCb;
-            if (TypeCheck.isString(name) && TypeCheck.isFunction(fn)) {
+            if (this._checkParams(name, fn)) {
                 var callback = this._callbacks.getElement(name);
                 if (TypeCheck.isDefined(callback)) {
                     isSubscribed = callback.registerFunction(fn);
@@ -830,8 +830,6 @@ define('src/EventDispatcher',["List", "TypeCheck", "Callback"], function (List, 
                     isSubscribed = newCb.registerFunction(fn);
                     isAdded = this._callbacks.addElement(newCb);
                 }
-            } else {
-                throw new TypeError("name or fn have wrong type");
             }
             return (isSubscribed && isAdded);
         },
@@ -844,13 +842,11 @@ define('src/EventDispatcher',["List", "TypeCheck", "Callback"], function (List, 
          */
         unsubscribeEvent: function (name, fn) {
             var isUnsubscribed = false;
-            if (TypeCheck.isString(name) && TypeCheck.isFunction(fn)) {
+            if (this._checkParams(name, fn)) {
                 var callback = this._callbacks.getElement(name);
                 if (TypeCheck.isDefined(callback)) {
                     isUnsubscribed = callback.unregisterFunction(fn);
                 }
-            } else {
-                throw new TypeError("name or fn have wrong type");
             }
             return isUnsubscribed;
         },
@@ -867,7 +863,20 @@ define('src/EventDispatcher',["List", "TypeCheck", "Callback"], function (List, 
                 isPublished = callback.broadcastToFunctions(params);
             }
             return isPublished;
+        },
+        /**
+         * @private
+         * @param {String} name - name of the event
+         * @param {Function} fn - function which will be subscribed/unsubscribed
+         * @returns {Boolean} True if params are valid, otherwise throw type error
+         */
+        _checkParams: function (name, fn) {
+            if (!TypeCheck.isString(name) || !TypeCheck.isFunction(fn)) {
+                throw new TypeError("name or fn have wrong type");
+            }
+            return true;
         }
+
     };
 });
 
