@@ -1,7 +1,7 @@
 define(["List", "TypeCheck", "Callback"], function (List, TypeCheck, Callback) {
     /**
      * Provides functionality for an event system 
-     * @alias EventDispatcher 
+     * @alias EventDispatcher
      */
     return {
         _callbacks: new List({ idProperty: "id" }),

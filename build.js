@@ -1,8 +1,9 @@
 ({
     baseUrl: '.',
-    out: 'dist/EventDispatcher.js',
-    optimize: 'none',
-    include: ["node_modules/almond/almond", "src/EventDispatcher"],
+    out: 'dist/jean-event-dispatcher.js',
+    optimize: 'uglify2',
+    name: "node_modules/jean-amd/dist/jean-amd",
+    include: ["src/EventDispatcher"],
     wrap: {
         start: 
         "(function (root, factory) { \n" +

@@ -1,4 +1,4 @@
-define(["EventDispatcher"], function (EventDispatcher) {
+define("TestModule", ["EventDispatcher"], function (EventDispatcher) {
     var result;
     return {
         getResult: function () {

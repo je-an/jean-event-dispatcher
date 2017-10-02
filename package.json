@@ -1,8 +1,8 @@
 {
   "name": "jean-event-dispatcher",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Provides functionality for an event-based communication system for use as an AMD module",
-  "main": ".js",
+  "main": "jean-event-dispatcher.js",
   "scripts": {
     "test": "open spec/spec-runner.html in browser"
   },
@@ -10,10 +10,10 @@
   "author": "Jeremias Andris",
   "license": "MIT",
   "dependencies": {
-    "almond": "^0.3.3",
-    "jean-callback": "0.0.6",
-    "jean-list": "0.0.5",
-    "jean-type-check": "0.0.4"
+    "jean-amd": "0.0.5",
+    "jean-callback": "0.0.9",
+    "jean-list": "0.0.8",
+    "jean-type-check": "0.0.5"
   },
   "repository": {
     "type": "git",
