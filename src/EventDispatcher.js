@@ -69,7 +69,6 @@ define(["List", "TypeCheck", "Callback"], function (List, TypeCheck, Callback) {
             }
             return true;
         }
-
     };
 });
 
